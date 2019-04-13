@@ -83,3 +83,49 @@ addNew.onclick = function() {
     var names = document.getElementsByClassName("nephew-name");
     names[names.length - 1].innerHTML = document.getElementById("nephew-name-input").value;
 }
+
+function repopulate(data) {
+    var events = document.getElementsByClassName("eventsnr");
+    var lastActive = document.getElementsByClassName("lastactive");
+    var repoNr = document.getElementsByClassName("reponr");
+    var followers = document.getElementsByClassName("followers");
+    var profileName = document.getElementsByClassName("profilename");
+    var projectList = document.getElementsByClassName("list-stat");
+
+    repoNr[repoNr.length - 1].innerHTML = data.userData.projectCount;
+    for (var i = 0; i < data.userData.projectNames.length; i++) {
+        var div = document.createElement("div");
+        var p = document.createElement("p");
+        p.innerText = data.userData.projectNames[i];
+        div.appendChild(p);
+        projectList[projectList.length - 1].appendChild(div);
+    }
+}
+
+var data;
+
+function getData() {
+    fetch('http://127.0.0.1:4000/git', {
+        method: 'POST'
+    })
+        .then(function(res) {
+            return res.json();
+        })
+        .then(function(res) {
+            console.log(res);
+            localStorage.setItem('data', JSON.stringify(res));
+            var d = new Date();
+            localStorage.setItem('lastRefresh', d.getDate());
+            repopulate(res);
+        });
+}
+
+function checkForData() {
+    var last = localStorage.getItem('lastRefresh');
+    var d = new Date();
+    var currentDay = d.getDate();
+
+    if (last != null) {
+        if (currentDay )
+    }
+}
