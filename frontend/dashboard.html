@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+
+    <title>App</title>
+    <meta name="description" content="App for tracking the progress of your loved ones">
+    <meta name="author" content="App">
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons"
+          rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css?family=Montserrat:300,400,700"
+          rel="stylesheet">
+    <link rel="stylesheet"
+          href="css/dashboard.css">
+    <link rel="stylesheet"
+          href="css/index.css">
+
+</head>
+
+<body>
+
+    <div id="header">
+
+        <h1 id="logo">App logo</h1>
+
+        <div id="navigation">
+            <i class="material-icons" id="close-nav">
+                arrow_forward
+            </i>
+            <ul>
+                <li class="header-user">
+                    <a href="#"><i class="material-icons">account_circle</i></a>
+                    <div class="account-dropdown">
+                        <p>Logged in as:</p>
+                        <ul>
+                            <li>Log out</li>
+                        </ul>
+                    </div>
+                </li>
+            </ul>
+        </div>
+
+        <i class="material-icons menu-but">
+            menu
+        </i>
+
+    </div>
+
+    <div id="dashboard-area">
+        <div id="dashboard-nav">
+
+            <ul>
+                <li>Summary</li>
+                <li>Commits</li>
+                <li>Contributions</li>
+            </ul>
+
+        </div>
+        <div id="dashboard-display">
+
+        </div>
+    </div>
+
+<script src="frontendjs/dashboard.js"></script>
+</body>
+</html>

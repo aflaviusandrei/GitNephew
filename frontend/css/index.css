@@ -24,11 +24,14 @@ body {
     display: flex;
     justify-content: space-between;
     height: 10vh;
+    position: fixed;
+    Width: 100%;
 }
 
 #header #logo {
     width: 40%;
     margin: auto 0 auto 20px;
+    color: white;
 }
 
 #header ul {
@@ -124,6 +127,10 @@ body {
     width: 50%;
     padding: 10px;
     cursor: pointer;
+}
+
+#pick ul li a {
+    color: white;
 }
 
 #pick ul li:first-child {
@@ -294,5 +301,9 @@ input {
     #pick ul li:first-child {
         border-bottom: 1px solid #bdc3c7;
         border-right: none;
+    }
+
+    #close-nav {
+        display: flex !important;
     }
 }
