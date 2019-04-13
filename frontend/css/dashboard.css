@@ -38,7 +38,7 @@ body {
 
 #dashboard-nav ul {
     display: flex;
-    flex-direction: column;
+    flex-wrap: wrap;
     justify-content: flex-start;
     width: 90%;
     margin: 0 auto 0 auto;
@@ -47,19 +47,45 @@ body {
 }
 
 #dashboard-nav ul li:hover {
-    background: #27ae60;
+    background: #d7dbdc;
+}
+
+#dashboard-nav ul li a {
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+    height: 100%;
+}
+
+#dashboard-nav ul li a > * {
+    text-align: center;
+}
+
+#dashboard-nav ul li a i {
+    font-size: 4em;
+    color: #1abc9c;
 }
 
 #dashboard-nav ul li {
     color: white;
     text-transform: uppercase;
+    width: 45%;
     margin: auto 0 auto 0;
     padding: 10px;
     cursor: pointer;
+    margin: 0 auto 10px auto;
+    background: #ecf0f1;
+    border-radius: 4px;
+    -webkit-transition: all 0.3s;
+    -moz-transition: all 0.3s;
+    -ms-transition: all 0.3s;
+    -o-transition: all 0.3s;
+    transition: all 0.3s;
 }
 
-#dashboard-nav ul li:not(:last-child) {
-    border-bottom: 1px solid white;
+#add-member a i {
+    font-size: 3em !important;
+    margin: auto;
 }
 
 #dashboard-display {
@@ -124,6 +150,22 @@ body {
     -ms-transform: translateY(0%);
     transition-delay: 0s, 0s, 0.2s; /* this removes the transition delay so the menu will be visible while the other styles transition */
 }
+
+#exit #close-reg {
+    height: 100%;
+}
+
+#member-details form {
+    display: flex;
+    flex-direction: column;
+    width: 90%;
+    margin: auto;
+}
+
+#member-details form label {
+    margin-top: 20px;
+}
+
 @media only screen and (min-width: 601px) {
     .header-user:hover > .account-dropdown {
         visibility: visible; /* shows sub-menu */
@@ -141,6 +183,9 @@ body {
     }
     #dashboard-nav {
         width: 100%;
+    }
+    #dashboard-nav > h3 {
+        text-align: center;
     }
     #dashboard-nav ul {
         margin: 20px auto 20px auto;
