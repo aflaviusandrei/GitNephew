@@ -43,23 +43,34 @@ app.post('/register', function (req, res) {
     }
 });
 
-app.post('/login', async function (req, res) {
+app.post('/login', function (req, res) {
     var data = req.body;
+
     user.findOne({ username: data.username }, function (err, user) {
-        bcrypt.compare(data.password, user.password, function (err, response) {
-            if (response) {
-                var payload = {
-                    username: data.username
-                };
-                var token = jwt.sign(payload, 'dfhdrfydrtd', { expiresIn: '1h' });
-                if (token !== '')
+        if (user) {
+            bcrypt.compare(data.password, user.password, function (err, response) {
+                if (response) {
+                    var payload = {
+                        username: data.username
+                    };
+                    var token = jwt.sign(payload, 'dfhdrfydrtd', { expiresIn: '1h' });
+                    if (token !== '')
+                        res.send({
+                            success: true,
+                            message: 'Succesfully authenticated',
+                            token: token
+                        });
+                } else
                     res.send({
-                        success: true,
-                        message: 'Succesfully authenticated',
-                        token: token
+                        success: false,
+                        message: 'Incorrect password'
                     });
-            }
-        });
+            });
+        } else
+            res.send({
+                success: false,
+                message: 'No username found with the name of ' + data.username
+            });
     });
 });
 
