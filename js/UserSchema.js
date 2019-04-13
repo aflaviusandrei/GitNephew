@@ -8,7 +8,15 @@ var UserSchema = new mongoose.Schema({
   apiKey: String,
 }, {timestamps: true});
 
+var gitDataSchema = new mongoose.Schema({
+  parent: {type: String},
+  projectNames: { type: Array },
+  projectCount: { type: Number }
+});
 
 UserSchema.plugin(uniqueValidator, {message: 'already exists.'});
 
-module.exports = mongoose.model('user', UserSchema);
+module.exports = {
+  user: mongoose.model('user', UserSchema),
+  gitData: mongoose.model('gitData', gitDataSchema)
+};
