@@ -25,22 +25,88 @@
         <h1 id="logo">App logo</h1>
 
         <div id="navigation">
+            <i class="material-icons" id="close-nav">
+                arrow_forward
+            </i>
             <ul>
-                <li>Home</li>
-                <li>Log in</li>
-                <li>Get started</li>
+                <li><a href="#">Home</a></li>
+                <li><a href="#">Log in</a></li>
+                <li><a href="#">Get started</a></li>
             </ul>
         </div>
+
+        <i class="material-icons menu-but">
+            menu
+        </i>
 
     </div>
 
     <div id="mast">
 
-        <a href="javascript:void(0)" class="try-button">Try now</a>
+        <div class="try-button">
+            <p>Try now</p>
+        </div>
+
+        <div id="getstarted">
+
+            <div id="reginner">
+
+                <div id="pick">
+                    <i class="material-icons" id="close-reg">
+                        keyboard_backspace
+                    </i>
+                    <ul>
+                        <li class="reg-opt highlight">Log in</li>
+                        <li class="reg-opt">Sign up</li>
+                    </ul>
+                </div>
+
+                <div id="regorlog">
+                    <div id="login" class="picked-option">
+
+                        <form>
+                            <label>Username</label>
+                            <input type='text' name='username' placeholder="Username">
+                            <label>Password</label>
+                            <input type='password' name='password' placeholder="Password">
+                        </form>
+
+                    </div>
+                    <div id="register">Register</div>
+                </div>
+
+            </div>
+
+        </div>
 
     </div>
 
     <div id="about">
+
+        <h1 class="section-title">What we offer</h1>
+
+        <div id="features">
+            <div class="feature">
+                <i class="material-icons">grade</i>
+                <p class="feature-desc">Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. </p>
+            </div>
+
+            <div class="feature">
+                <i class="material-icons">grade</i>
+                <p class="feature-desc">Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. </p>
+            </div>
+
+            <div class="feature">
+                <i class="material-icons">grade</i>
+                <p class="feature-desc">Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. </p>
+            </div>
+
+            <div class="feature">
+                <i class="material-icons">grade</i>
+                <p class="feature-desc">Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. </p>
+            </div>
+        </div>
+
     </div>
 
     <div id="footer">
@@ -49,6 +115,18 @@
 </div>
 
 
-<script src="js/scripts.js"></script>
+<script src="frontendjs/index.js"></script>
+<script>
+    window.onload = function() {
+        fetch('https://api.github.com/users/DontStealMyCodePls/repos')
+        .then(function(res) {
+            return res.json();
+        })
+        .then(function(res) {
+            console.log(res);
+        })
+
+    }
+</script>
 </body>
 </html>

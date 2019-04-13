@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+
+    <title>App</title>
+    <meta name="description" content="App for tracking the progress of your loved ones">
+    <meta name="author" content="App">
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons"
+          rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css?family=Montserrat:300,400,700"
+          rel="stylesheet">
+    <link rel="stylesheet"
+          href="css/dashboard.css">
+    <link rel="stylesheet"
+          href="css/index.css">
+
+</head>
+
+<body>
+
+    <div id="header">
+
+        <h1 id="logo">App logo</h1>
+
+        <div id="user-section">
+            <ul>
+                <li class="header-user">
+                    <a href="#"><i class="material-icons">account_circle</i></a>
+                    <div class="account-dropdown">
+                        <p>Logged in as:</p>
+                        <ul>
+                            <li>Log out</li>
+                        </ul>
+                    </div>
+                </li>
+            </ul>
+        </div>
+
+    </div>
+
+    <div id="dashboard-area">
+        <div id="dashboard-nav">
+
+            <h3>Your family</h3>
+
+            <ul>
+                <li><a href="#"><i class="material-icons">account_circle</i><p class="nephew-name">mary</p></a></li>
+                <li><a href="#"><i class="material-icons">account_circle</i><p class="nephew-name">mary</p></a></li>
+                <li><a href="#"><i class="material-icons">account_circle</i><p class="nephew-name">mary</p></a></li>
+                <li id="add-member"><a href="#"><i class="material-icons">add_circle</i></a></li>
+            </ul>
+
+            <div id="getstarted">
+
+                <div id="reginner">
+
+                    <div id="exit">
+                        <i class="material-icons" id="close-reg">
+                            keyboard_backspace
+                        </i>
+                    </div>
+
+                    <div id="member-details">
+                        <form>
+                            <label>Name</label>
+                            <input type='text' name='username' placeholder="Name">
+                            <label>Github name</label>
+                            <input type='text' name='username' placeholder="Github name">
+                        </form>
+                    </div>
+
+                </div>
+
+            </div>
+
+        </div>
+        <div id="dashboard-display">
+
+        </div>
+    </div>
+
+<script src="frontendjs/dashboard.js"></script>
+</body>
+</html>
