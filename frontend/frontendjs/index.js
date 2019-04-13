@@ -37,3 +37,17 @@ regOpts[1].onclick = function() {
     document.getElementsByClassName("highlight")[0].classList.remove("highlight");
     this.classList.add("highlight");
 }
+
+// Scroll change style for header
+var header = document.getElementById("header");
+
+window.onscroll = function() {
+    var distanceFromTop = document.all? iebody.scrollTop : pageYOffset;
+
+    if (distanceFromTop > 1) {
+        header.classList.add("scrolled-header");
+    }
+    else {
+        header.classList.remove("scrolled-header");
+    }
+}
