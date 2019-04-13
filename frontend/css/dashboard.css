@@ -195,6 +195,8 @@ body {
     padding-right: 20px;
     display: flex;
     justify-content: flex-end;
+    width: 100px;
+    flex-direction: column;
 }
 .refresh i {
     text-align: right;
@@ -202,6 +204,10 @@ body {
     color: white;
     margin: auto;
     cursor: pointer;
+}
+.resfresh p {
+    color: white;
+    margin: auto;
 }
 .refresh i:hover {
     color: darkorange;
