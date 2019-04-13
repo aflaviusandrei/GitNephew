@@ -186,6 +186,7 @@ body {
     background: #1abc9c;
     padding: 20px;
     justify-content: space-between;
+    height: 20%;
 }
 .profileinfo {
     display: flex;
@@ -237,6 +238,8 @@ body {
     display: flex;
     flex-wrap: wrap;
     justify-content: flex-start;
+    height: 80%;
+    overflow: auto;
 }
 .stat-info {
     width: 100%;
@@ -290,4 +293,21 @@ body {
     .stats-main {
         justify-content: center;
     }
+}
+.list-stat {
+    border-radius: 4px;
+    background: white;
+    width: 100%;
+    margin: 10px;
+    padding: 30px;
+}
+.list-stat > span {
+    text-transform: uppercase;
+    font-weight: 700;
+    font-size: 0.9em;
+    color: #95a5a6;
+}
+.list-stat > div {
+    padding: 10px;
+    border-bottom: 1px solid #95a5a6;
 }
