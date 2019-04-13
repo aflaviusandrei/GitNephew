@@ -183,6 +183,16 @@ input {
 
 .picked-option {
     display: flex !important;
+    flex-direction: column;
+}
+
+.picked-option button {
+    width: 100px;
+    padding: 10px;
+    background: #e67e22;
+    border-radius: 3px;
+    margin: 20px auto;
+    cursor: pointer;
 }
 
 #about {

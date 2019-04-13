@@ -49,3 +49,37 @@ function checkParent(target, parent) {
 //         if (checkParent(target, regArea) == 0) toggleReg();
 //     }
 // });
+
+var refresh = document.getElementsByClassName("refresh");
+
+function spin(el) {
+    el.onclick = function() {
+        el.classList.add("rotated");
+        setTimeout(function() {
+            el.classList.remove("transitioned");
+        }, 900);
+        setTimeout(function() {
+            el.classList.remove("rotated");
+        }, 1000);
+        setTimeout(function() {
+            el.classList.add("transitioned");
+        }, 1100);
+    }
+}
+
+for (var i = 0; i < refresh.length; i++) {
+    spin(refresh[i].children[0]);
+}
+
+// Create new nephew
+
+var addNew = document.getElementById("add-new-button");
+var addContainer = document.getElementById("add-member");
+var member = addContainer.previousElementSibling.cloneNode([true]);
+
+addNew.onclick = function() {
+    addContainer.parentNode.insertBefore(member, addContainer);
+    member = addContainer.previousElementSibling.cloneNode([true]);
+    var names = document.getElementsByClassName("nephew-name");
+    names[names.length - 1].innerHTML = document.getElementById("nephew-name-input").value;
+}

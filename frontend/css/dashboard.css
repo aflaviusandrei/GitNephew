@@ -91,6 +91,7 @@ body {
 #dashboard-display {
     width: 80%;
     border-top: 1px solid #bdc3c7;
+    background: #ecf0f1;
 }
 
 #dashboard-nav > h3 {
@@ -154,7 +155,10 @@ body {
 #exit #close-reg {
     height: 100%;
 }
-
+#member-details {
+    display: flex;
+    flex-direction: column;
+}
 #member-details form {
     display: flex;
     flex-direction: column;
@@ -177,6 +181,96 @@ body {
         transition-delay: 0s, 0s, 0.2s; /* this removes the transition delay so the menu will be visible while the other styles transition */
     }
 }
+.stats-header {
+    display: flex;
+    background: #1abc9c;
+    padding: 20px;
+    justify-content: space-between;
+}
+.profileinfo {
+    display: flex;
+}
+.refresh {
+    padding-right: 20px;
+    display: flex;
+}
+.refresh i {
+    color: white;
+    font-size: 3em;
+    cursor: pointer;
+    margin: auto;
+    -webkit-transition-property: -webkit-transform;
+    -moz-transition-property: -moz-transform;
+    -o-transition-property: -o-transform;
+    transition-property: transform;
+}
+.transitioned {
+    -webkit-transition-duration: 0.8s;
+    -moz-transition-duration: 0.8s;
+    -o-transition-duration: 0.8s;
+    transition-duration: 0.8s;
+}
+.open-reg button {
+    width: 100px;
+    padding: 10px;
+    background: #e67e22;
+    border-radius: 3px;
+    margin: 20px auto;
+    cursor: pointer;
+}
+.rotated {
+    -webkit-transform:rotate(360deg);
+    -moz-transform:rotate(360deg);
+    -o-transform:rotate(360deg);
+}
+.profile-stats > * {
+    color: white;
+}
+.profile-stats {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    margin-left: 20px;
+}
+.stats-main {
+    padding: 20px;
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: flex-start;
+}
+.stat-info {
+    width: 100%;
+    height: 100%;
+    display: flex;
+}
+.stat-info > * {
+    margin: auto;
+}
+.stat-info > h1 {
+    font-size: 4em;
+}
+.stat > span {
+    text-transform: uppercase;
+    font-weight: 700;
+    font-size: 0.9em;
+    color: #95a5a6;
+}
+.stat {
+    border-radius: 4px;
+    background: white;
+    width: 200px;
+    height: 200px;
+    padding: 10px;
+    margin: 10px;
+}
+.profilepic {
+    border-radius: 100%;
+    background:url("portrait.jpg");
+    background-repeat: no-repeat;
+    background-size: cover;
+    width: 100px;
+    height: 100px;
+}
 @media only screen and (max-width: 600px) {
     #dashboard-area {
         flex-direction: column;
@@ -192,5 +286,8 @@ body {
     }
     #dashboard-display {
         width: 100%;
+    }
+    .stats-main {
+        justify-content: center;
     }
 }

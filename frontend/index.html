@@ -71,8 +71,19 @@
                             <input type='password' name='password' placeholder="Password">
                         </form>
 
+                        <button>Log in</button>
+
                     </div>
-                    <div id="register">Register</div>
+                    <div id="register">
+                        <form>
+                            <label>Username</label>
+                            <input type='text' name='username' placeholder="Username">
+                            <label>Password</label>
+                            <input type='password' name='password' placeholder="Password">
+                        </form>
+
+                        <button>Sign up</button>
+                    </div>
                 </div>
 
             </div>
@@ -118,14 +129,15 @@
 <script src="frontendjs/index.js"></script>
 <script>
     window.onload = function() {
-        fetch('https://api.github.com/users/DontStealMyCodePls/repos')
-        .then(function(res) {
-            return res.json();
+        fetch('http://127.0.0.1:4000/git', {
+            method: 'POST'
         })
-        .then(function(res) {
-            console.log(res);
-        })
-
+            .then(function(res) {
+                return res.json();
+            })
+            .then(function(res) {
+                console.log(res);
+            });
     }
 </script>
 </body>
