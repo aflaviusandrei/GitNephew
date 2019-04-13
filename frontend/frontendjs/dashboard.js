@@ -126,6 +126,15 @@ function checkForData() {
     var currentDay = d.getDate();
 
     if (last != null) {
-        if (currentDay )
+        if (currentDay - last > 2) getData();
+        else {
+            repopulate(JSON.parse(localStorage.getItem('data')));
+        }
+        localStorage.setItem('lastRefresh', d.getDate());
+    }
+    else {
+        getData();
     }
 }
+
+checkForData();

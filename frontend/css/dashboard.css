@@ -194,16 +194,17 @@ body {
 .refresh {
     padding-right: 20px;
     display: flex;
+    justify-content: flex-end;
 }
 .refresh i {
-    color: white;
+    text-align: right;
     font-size: 3em;
-    cursor: pointer;
+    color: white;
     margin: auto;
-    -webkit-transition-property: -webkit-transform;
-    -moz-transition-property: -moz-transform;
-    -o-transition-property: -o-transform;
-    transition-property: transform;
+    cursor: pointer;
+}
+.refresh i:hover {
+    color: darkorange;
 }
 .transitioned {
     -webkit-transition-duration: 0.8s;
@@ -292,6 +293,14 @@ body {
     }
     .stats-main {
         justify-content: center;
+        overflow: visible;
+    }
+    .stats-header {
+        height: 100px;
+    }
+    .profilepic {
+        width: 50px;
+        height: 50px;
     }
 }
 .list-stat {
