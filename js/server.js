@@ -15,13 +15,32 @@ app.use(cors());
 app.use(bodyParser.urlencoded({ extended: false }));
 app.use(bodyParser.json());
 
+var user = require('./UserSchema.js');
+
 app.use(express.static('frontend', {
     extensions: ['html', 'htm']
 }));
 
 app.post('/register', function(req, res) {
     var data = req.body;
-    res.send(data);
+    if(data !== '{}') {
+        bcrypt.hash(data.password, null, null, function(err, hash) {
+            data.password = hash;
+            var newUser = new user(data);
+            newUser.save(function(err) {
+                if(err)
+                    res.send({
+                        success: false,
+                        message: err._message
+                    });
+                else
+                    res.send({
+                        success: true,
+                        message: 'User registered!'
+                    });
+            })
+        });
+    }
 });
 
 app.listen('4000');

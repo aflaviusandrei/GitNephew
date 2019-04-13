@@ -50,5 +50,29 @@
 
 
 <script src="js/scripts.js"></script>
+<script>
+    window.onload = function() {
+        fetch('http://127.0.0.1:4000/register', {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json'
+            },
+            body: JSON.stringify({
+                user: 'mihai',
+                password: 'barosan',
+                email: 'barosan@yahoo.com'
+            })
+        })
+        .then(function(res) {
+            return res.json();
+        })
+        .then(function(res) {
+            console.log(res);
+        })
+        .catch(function(err) {
+            console.log(err);
+        });
+    }
+</script>
 </body>
 </html>
