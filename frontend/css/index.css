@@ -76,14 +76,17 @@ body {
 }
 
 #getstarted {
-    /*display: none;*/
     position: fixed;
-    border-radius: 5px;
     height: 100vh;
     width: 100vw;
     top: 0;
     left: 0;
-    display: flex;
+    display: none;
+    background: rgba(0,0,0,0.6);
+}
+
+.open-reg {
+    display: flex !important;
 }
 
 #reginner {
@@ -98,8 +101,16 @@ body {
 
 #pick {
     border-bottom: 1px solid #bdc3c7;
-    height: 15%;
+    height: 20%;
     display: flex;
+    flex-direction: column;
+}
+.close-reg {
+    background: #ecf0f1;
+    width: 100%;
+    cursor: pointer;
+    text-transform: uppercase;
+    height: 40%;
 }
 
 #pick ul {
@@ -107,6 +118,7 @@ body {
     width: 100%;
     list-style: none;
     margin: auto;
+    height: 60%;
 }
 
 #pick ul li {
@@ -126,5 +138,40 @@ input {
 }
 
 #regorlog {
-    height: 85%;
+    height: 80%;
+}
+
+#about {
+    display: flex;
+    flex-direction: column;
+}
+
+#about > * {
+    margin: auto;
+}
+
+#features {
+    display: flex;
+    flex-wrap: wrap;
+    width: 90%;
+    justify-content: center;
+}
+
+.feature {
+    width: 250px;
+    background: #ecf0f1;
+    border-radius: 3px;
+    padding: 20px;
+    margin: 20px;
+    display: flex;
+    flex-direction: column;
+}
+
+.feature i {
+    margin: auto;
+    font-size: 5em;
+}
+
+.feature p {
+    text-align: center;
 }
