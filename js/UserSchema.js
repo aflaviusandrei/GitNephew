@@ -11,4 +11,4 @@ var UserSchema = new mongoose.Schema({
 
 UserSchema.plugin(uniqueValidator, {message: 'already exists.'});
 
-module.exports = mongoose.model('User', UserSchema, 'User');
+module.exports = mongoose.model('user', UserSchema);
