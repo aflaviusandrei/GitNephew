@@ -5,7 +5,7 @@ var bcrypt = require('bcrypt-nodejs');
 var mongoose = require('mongoose');
 var jwt = require('jsonwebtoken');
 var fetch = require('node-fetch');
-var getGitData = require('./log_repos.js');
+var router = express.Router();
 
 mongoose.connect('mongodb+srv://reversio:elcomandante@edociif-5wsli.gcp.mongodb.net/test?retryWrites=true', { useNewUrlParser: true })
     .catch(function (err) {
@@ -48,7 +48,7 @@ app.post('/register', function (req, res) {
 app.post('/login', function (req, res) {
     var data = req.body;
 
-    user.findOne({ username: data.username }, function (err, user) {
+    user.user.findOne({ username: data.username }, function (err, user) {
         if (err)
             res.send({
                 success: false,
@@ -83,7 +83,20 @@ app.post('/login', function (req, res) {
     });
 });
 
-app.post('/git', function (req, response) {
+router.use(function(req, res, next) {
+    var token = req.headers['Authorization'];
+    console.log(token);
+    var split = token.split(' ');
+    jwt.verify(split[1], 'dfhdrfydrtd', function(err, decoded) {
+        if(err)
+            console.warn(err);
+        else
+            if(decoded)
+                next();
+    });
+});
+
+router.post('/git', function (req, response) {
     let countRepos = [];
     let userData = {
         projectNames: '',
@@ -119,5 +132,6 @@ app.post('/git', function (req, response) {
         });
 });
 
+app.use('/admin', router);
 app.listen('4000');
 console.log('Listening');
