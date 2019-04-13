@@ -1,0 +1,43 @@
+/* Normalize CSS */
+* {
+    margin: 0;
+    padding: 0;
+    border-width: 0.3px;
+    -webkit-box-sizing: border-box;
+    box-sizing: border-box;
+    font-family: 'Montserrat', sans-serif;
+}
+
+body {
+    height: 100vh;
+}
+
+.body-container {
+    display: flex;
+    flex-direction: column;
+}
+
+#header {
+    display: flex;
+    justify-content: space-between;
+}
+
+#header #logo {
+    width: 40%;
+}
+
+#header ul {
+    display: flex;
+    justify-content: space-around;
+    list-style: none;
+}
+
+#header ul li {
+    margin: auto 20px auto 0;
+}
+
+#navigation {
+    width: 60%;
+    display: flex;
+    justify-content: flex-end;
+}
