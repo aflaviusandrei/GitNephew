@@ -1,0 +1,95 @@
+/* Normalize CSS */
+* {
+    margin: 0;
+    padding: 0;
+    border-width: 0.3px;
+    -webkit-box-sizing: border-box;
+    box-sizing: border-box;
+    font-family: 'Montserrat', sans-serif;
+}
+a {
+    text-decoration: none;
+}
+
+body {
+    height: 100vh;
+    display: flex;
+    flex-direction: column;
+}
+
+#dashboard-area {
+    height: 90vh;
+    display: flex;
+}
+
+#dashboard-nav {
+    width: 20%;
+    background: #2ecc71;
+}
+
+#dashboard-nav ul {
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start;
+    width: 90%;
+    margin: 0 auto 0 auto;
+    list-style: none;
+    margin-top: 20px;
+}
+
+#dashboard-nav ul li:hover {
+    background: #27ae60;
+}
+
+#dashboard-nav ul li {
+    color: white;
+    text-transform: uppercase;
+    margin: auto 0 auto 0;
+    padding: 10px;
+    cursor: pointer;
+}
+
+#dashboard-display {
+    width: 80%;
+}
+
+.header-user i {
+    color: black;
+    font-size: 3em;
+}
+
+.header-user i:hover {
+    color:#e67e22;
+}
+
+.account-dropdown {
+    height: 200px;
+    width: 200px;
+    border-radius: 3px;
+    background: #ecf0f1;
+    visibility: hidden;
+    opacity: 0;
+    flex-direction: column;
+    display: flex;
+    position: absolute;
+    width: 180px;
+    top: 65px;
+    right: 20px;
+    transform: translateY(2em);
+    -webkit-transform: translateY(2em);
+    -ms-transform: translateY(2em);
+    z-index: -1;
+    transition: all 0.2s ease-in-out 0s, visibility 0s linear 0.2s, z-index 0s linear 0.01s;
+}
+.header-user:hover > .account-dropdown {
+    visibility: visible; /* shows sub-menu */
+    opacity: 1;
+    z-index: 1;
+    transform: translateY(0%);
+    -webkit-transform: translateY(0%);
+    -ms-transform: translateY(0%);
+    transition-delay: 0s, 0s, 0.2s; /* this removes the transition delay so the menu will be visible while the other styles transition */
+}
+.account-dropdown > p {
+    background: #bdc3c7;
+}
