@@ -7,6 +7,9 @@
     box-sizing: border-box;
     font-family: 'Montserrat', sans-serif;
 }
+a {
+    text-decoration: none;
+}
 
 body {
     height: 100vh;
@@ -20,10 +23,12 @@ body {
 #header {
     display: flex;
     justify-content: space-between;
+    height: 10vh;
 }
 
 #header #logo {
     width: 40%;
+    margin: auto 0 auto 20px;
 }
 
 #header ul {
@@ -40,4 +45,86 @@ body {
     width: 60%;
     display: flex;
     justify-content: flex-end;
+}
+
+#mast {
+    display: flex;
+    height: 90vh;
+    background-image: url("back.jpg");
+    background-repeat: no-repeat;
+    background-size: cover;
+}
+
+.try-button {
+    margin: auto;
+    width: 300px;
+    height: 100px;
+    background: #2ecc71;
+    display: flex;
+    cursor: pointer;
+}
+
+.try-button:hover {
+    background: #27ae60;
+}
+
+.try-button p {
+    margin: auto;
+    display: block;
+    color: white;
+    font-size: 1.5em;
+}
+
+#getstarted {
+    /*display: none;*/
+    position: fixed;
+    border-radius: 5px;
+    height: 100vh;
+    width: 100vw;
+    top: 0;
+    left: 0;
+    display: flex;
+}
+
+#reginner {
+    width: 500px;
+    background: white;
+    height: 300px;
+    margin: auto;
+    border-radius: 5px;
+    display: flex;
+    flex-direction: column;
+}
+
+#pick {
+    border-bottom: 1px solid #bdc3c7;
+    height: 15%;
+    display: flex;
+}
+
+#pick ul {
+    display: flex;
+    width: 100%;
+    list-style: none;
+    margin: auto;
+}
+
+#pick ul li {
+    width: 50%;
+    padding: 10px;
+    cursor: pointer;
+}
+
+#pick ul li:first-child {
+    border-right: 1px solid #bdc3c7;
+}
+
+input {
+    border-radius: 3px;
+    border: 1px solid black;
+    padding: 10px;
+}
+
+#regorlog {
+    height: 85%;
 }
