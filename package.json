@@ -17,11 +17,13 @@
   },
   "homepage": "https://gitlab.com/reversio/fiicodefinal#readme",
   "dependencies": {
+    "@octokit/rest": "^16.23.4",
     "bcrypt-nodejs": "0.0.3",
     "body-parser": "^1.18.3",
     "cors": "^2.8.5",
+    "esm": "^3.2.22",
     "express": "^4.16.4",
-    "gitlab": "^4.5.1",
-    "mongoose": "^5.5.1"
+    "mongoose": "^5.5.1",
+    "octonode": "^0.9.5"
   }
 }
