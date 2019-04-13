@@ -2,6 +2,12 @@ var express = require('express');
 var cors = require('cors');
 var bodyParser = require('body-parser');
 var bcrypt = require('bcrypt-nodejs');
+var mongoose = require('mongoose');
+
+mongoose.connect('mongodb+srv://reversio:elcomandante@edociif-5wsli.gcp.mongodb.net/test?retryWrites=true', { useNewUrlParser: true })
+.catch(function(err) {
+    console.log(err);
+});
 
 var app = express();
 
@@ -15,7 +21,7 @@ app.use(express.static('frontend', {
 
 app.post('/register', function(req, res) {
     var data = req.body;
-    console.log(data);
+    res.send(data);
 });
 
 app.listen('4000');
