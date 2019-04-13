@@ -1,7 +1,9 @@
 document.addEventListener('DOMContentLoaded', function () {
     var form = document.getElementById('login').querySelector('form');
-    form.addEventListener('submit', function () {
-        var data = new FormData(this);
+    console.log(form);
+    form.addEventListener('submit', function (e) {
+        e.preventDefault();
+        var data = formToJSON(this);
         fetch('http://127.0.0.1:4000/login', {
             method: 'POST',
             headers: {
@@ -13,7 +15,11 @@ document.addEventListener('DOMContentLoaded', function () {
             return res.json();
         })
         .then(function(res) {
-            console.log(res);
+            if(res.success) {
+                if(window.localStorage.getItem('token') !== null)
+                    window.localStorage.setItem('token', res.token);
+                alert(res.message);
+            }
         });
     });
 });
