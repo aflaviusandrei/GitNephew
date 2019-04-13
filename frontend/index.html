@@ -116,31 +116,14 @@
 <script src="frontendjs/index.js"></script>
 <script>
     window.onload = function() {
-        fetch('http://127.0.0.1:4000/login', {
-            method: 'POST',
-            headers: {
-                'Content-Type': 'application/json'
-            },
-            body: JSON.stringify({
-                username: 'mihai',
-                password: 'barosan'
-            })
-        })
+        fetch('https://api.github.com/users/DontStealMyCodePls/repos')
         .then(function(res) {
             return res.json();
         })
         .then(function(res) {
-            if(res.success) {
-                var localStorage = window.localStorage;
-                if(localStorage.getItem('token') === null) {
-                    localStorage.setItem('token', res.token);
-                        console.log(res.message);
-                }
-            }
+            console.log(res);
         })
-        .catch(function(err) {
-            console.log(err);
-        });
+
     }
 </script>
 </body>

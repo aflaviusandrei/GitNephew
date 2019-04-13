@@ -47,9 +47,16 @@ app.post('/login', function (req, res) {
     var data = req.body;
 
     user.findOne({ username: data.username }, function (err, user) {
-        if (user) {
+        if(err)
+            res.send({
+                success: false,
+                message: err._message
+            });
+        else if (user) {
             bcrypt.compare(data.password, user.password, function (err, response) {
-                if (response) {
+                if(err)
+                    console.warn(err._message);
+                else if (response) {
                     var payload = {
                         username: data.username
                     };
