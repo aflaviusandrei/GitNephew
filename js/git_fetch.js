@@ -38,7 +38,6 @@ async function fetchRepos(username) {
   return await (repos);
 }
 
-//var x  = fetchRepos('funchal');
 
 async function gatherData(username) {
   let x = await fetchUserData(username);
@@ -46,12 +45,12 @@ async function gatherData(username) {
   return [x, y];
 }
 
-//console.log(gatherData('funchal'));
-/* usage of gatherData
-
+/*
 gatherData('funchal').then(x => {
   console.log(x);
 });
 */
 
-module.exports = gatherData;
+exports.gatherData = gatherData;
+
+
