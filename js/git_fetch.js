@@ -35,22 +35,23 @@ async function fetchRepos(username) {
   for (var i in data) {
     repos.push(data[i].name);
   }
-   return await (repos);
+  return await (repos);
 }
 
 //var x  = fetchRepos('funchal');
 
 async function gatherData(username) {
-  let x =  await fetchUserData(username);
-  let y =  await fetchRepos(username);
-  return [x,y];
+  let x = await fetchUserData(username);
+  let y = await fetchRepos(username);
+  return [x, y];
 }
 
 //console.log(gatherData('funchal'));
+/* usage of gatherData
 
-gatherData('funchal').then(x => { 
-  console.log(x); 
+gatherData('funchal').then(x => {
+  console.log(x);
 });
-
+*/
 
 module.exports = gatherData;
