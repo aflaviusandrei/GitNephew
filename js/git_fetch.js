@@ -40,9 +40,16 @@ async function fetchRepos(username) {
 
 
 async function gatherData(username) {
-  let x = await fetchUserData(username);
-  let y = await fetchRepos(username);
-  return [x, y];
+  //let x = await fetchUserData(username);
+  //let y = await fetchRepos(username);
+
+  let data = {
+    userData: await fetchUserData(username),
+    repoData: await fetchRepos(username),
+
+  }
+
+  return data;
 }
 
 /*
