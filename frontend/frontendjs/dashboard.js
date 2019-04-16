@@ -1,14 +1,3 @@
-// var menuBut = document.getElementsByClassName("menu-but")[0],
-//     nav = document.getElementById("navigation"),
-//     closeNav = document.getElementById("close-nav");
-//
-// function toggleNav() {
-//     nav.classList.toggle("open-nav");
-// }
-//
-// menuBut.onclick = toggleNav;
-// closeNav.onclick = toggleNav;
-
 var tryButton = document.getElementById("add-member"),
     regArea = document.getElementById("getstarted"),
     closeReg = document.getElementById("close-reg");
@@ -42,14 +31,6 @@ function checkParent(target, parent) {
     return is;
 }
 
-// document.addEventListener("click", function(evt) {
-//     var target = evt.target;
-//
-//     if (regArea.classList.contains("open-reg")) {
-//         if (checkParent(target, regArea) == 0) toggleReg();
-//     }
-// });
-
 var refresh = document.getElementsByClassName("refresh");
 
 function spin(el) {
@@ -71,20 +52,7 @@ for (var i = 0; i < refresh.length; i++) {
     spin(refresh[i].children[0]);
 }
 
-// Create new nephew
-
-var addNew = document.getElementById("add-new-button");
-var addContainer = document.getElementById("add-member");
-var member = addContainer.previousElementSibling.cloneNode([true]);
-
-addNew.onclick = function () {
-    addContainer.parentNode.insertBefore(member, addContainer);
-    member = addContainer.previousElementSibling.cloneNode([true]);
-    var names = document.getElementsByClassName("nephew-name");
-    names[names.length - 1].innerHTML = document.getElementById("nephew-name-input").value;
-}
-
-function repopulate(data) {
+function repopulate(userData, repoData) {
     var events = document.getElementsByClassName("eventsnr");
     var lastActive = document.getElementsByClassName("lastactive");
     var repoNr = document.getElementsByClassName("reponr");
@@ -92,13 +60,21 @@ function repopulate(data) {
     var profileName = document.getElementsByClassName("profilename");
     var projectList = document.getElementsByClassName("list-stat");
 
-    repoNr[repoNr.length - 1].innerHTML = data.userData.projectCount;
-    for (var i = 0; i < data.userData.projectNames.length; i++) {
+    repoNr[repoNr.length - 1].innerHTML = userData.repos;
+    for (var i = 0; i < repoData.length; i++) {
         var div = document.createElement("div");
         var p = document.createElement("p");
-        p.innerText = data.userData.projectNames[i];
+        p.innerText = repoData[i];
         div.appendChild(p);
         projectList[projectList.length - 1].appendChild(div);
+    }
+
+    for (i = 0; i < profileName.length; i++) {
+        profileName[i].innerText = userData.name;
+    }
+
+    for (i = 0; i < followers.length; i++) {
+        followers[i].innerText = userData.followers;
     }
 }
 
@@ -115,25 +91,38 @@ function getData() {
             return res.json();
         })
         .then(function (res) {
+            repopulate(res.userData, res.repoData);
             console.log(res);
         });
 }   
 
-function checkForData() {
-    var last = localStorage.getItem('lastRefresh');
-    var d = new Date();
-    var currentDay = d.getDate();
-
-    if (last != null) {
-        if (currentDay - last > 2) getData();
-        else {
-            repopulate(JSON.parse(localStorage.getItem('data')));
-        }
-        localStorage.setItem('lastRefresh', d.getDate());
-    }
-    else {
-
-    }
-}
 getData();
-//checkForData();
+
+// Create new nephew
+
+var addNew = document.getElementById("add-new-button");
+var addContainer = document.getElementById("add-member");
+var member = addContainer.previousElementSibling.cloneNode([true]);
+
+addNew.onclick = function () {
+    addContainer.parentNode.insertBefore(member, addContainer);
+    member = addContainer.previousElementSibling.cloneNode([true]);
+    var names = document.getElementsByClassName("nephew-name");
+    names[names.length - 1].innerHTML = document.getElementById("nephew-name-input").value;
+
+    var nepName = document.getElementById("nephew-name-input").value;
+    var nepGit = document.getElementById("nephew-github").value;
+
+    var url = '/git';
+    var data = {username: nepGit, name:nepName};
+
+    fetch(url, {
+      method: 'POST',
+      body: JSON.stringify(data),
+      headers:{
+        'Content-Type': 'application/json'
+      }
+    }).then(res => res.json())
+    .then(response => console.log('Success:', JSON.stringify(response)))
+    .catch(error => console.error('Error:', error));
+}

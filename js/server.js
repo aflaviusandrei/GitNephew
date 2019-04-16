@@ -97,6 +97,7 @@ app.post('/git', function (req, res) {
     gatherData('funchal').then(data => {
         //further db inplementation
         parsedData = data;
+        console.log(req.body);
         res.send(data);
     })
 
