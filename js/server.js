@@ -94,10 +94,9 @@ app.post('/login', function (req, res) {
 });
 
 app.post('/git', function (req, res) {
-    gatherData('funchal').then(data => {
+    console.log(req.body);
+    gatherData(req.body.username).then(data => {
         //further db inplementation
-        parsedData = data;
-        console.log(req.body);
         res.send(data);
     })
 
