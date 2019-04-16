@@ -1,11 +1,11 @@
 document.addEventListener('DOMContentLoaded', function () {
-    var form = document.getElementById('login').querySelector('form');
+    var form = document.getElementById('register').querySelector('form');
     console.log(form);
     form.addEventListener('submit', function (e) {
         e.preventDefault();
         var data = formToJSON(this);
         console.log(data);
-        fetch('/login', {
+        fetch('/register', {
             method: 'POST',
             headers: {
                 'Content-Type': 'application/json'
@@ -15,12 +15,6 @@ document.addEventListener('DOMContentLoaded', function () {
         .then(function(res) {
             return res.json();
         })  
-        .then(function(res) {
-            if(res.success) {
-                if(window.localStorage.getItem('token') !== null)
-                    window.localStorage.setItem('token', res.token);
-                alert(res.message);
-            }
+
         });
     });
-});

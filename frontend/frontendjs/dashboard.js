@@ -24,7 +24,7 @@ if (window.innerWidth <= 600) {
     var headerUser = document.getElementsByClassName("header-user")[0],
         accountDrop = document.getElementsByClassName("account-dropdown")[0];
 
-    headerUser.onclick = function() {
+    headerUser.onclick = function () {
         accountDrop.classList.toggle("dropped");
     }
 }
@@ -53,15 +53,15 @@ function checkParent(target, parent) {
 var refresh = document.getElementsByClassName("refresh");
 
 function spin(el) {
-    el.onclick = function() {
+    el.onclick = function () {
         el.classList.add("rotated");
-        setTimeout(function() {
+        setTimeout(function () {
             el.classList.remove("transitioned");
         }, 900);
-        setTimeout(function() {
+        setTimeout(function () {
             el.classList.remove("rotated");
         }, 1000);
-        setTimeout(function() {
+        setTimeout(function () {
             el.classList.add("transitioned");
         }, 1100);
     }
@@ -77,7 +77,7 @@ var addNew = document.getElementById("add-new-button");
 var addContainer = document.getElementById("add-member");
 var member = addContainer.previousElementSibling.cloneNode([true]);
 
-addNew.onclick = function() {
+addNew.onclick = function () {
     addContainer.parentNode.insertBefore(member, addContainer);
     member = addContainer.previousElementSibling.cloneNode([true]);
     var names = document.getElementsByClassName("nephew-name");
@@ -105,20 +105,19 @@ function repopulate(data) {
 var data;
 
 function getData() {
-    fetch('http://127.0.0.1:4000/git', {
-        method: 'POST'
+    fetch('/git', {
+        method: 'POST',
+        headers: {
+            'Content-Type': 'application/json'
+        },
     })
-        .then(function(res) {
+        .then(function (res) {
             return res.json();
         })
-        .then(function(res) {
+        .then(function (res) {
             console.log(res);
-            localStorage.setItem('data', JSON.stringify(res));
-            var d = new Date();
-            localStorage.setItem('lastRefresh', d.getDate());
-            repopulate(res);
         });
-}
+}   
 
 function checkForData() {
     var last = localStorage.getItem('lastRefresh');
@@ -133,8 +132,8 @@ function checkForData() {
         localStorage.setItem('lastRefresh', d.getDate());
     }
     else {
-        getData();
+
     }
 }
-
-checkForData();
+getData();
+//checkForData();

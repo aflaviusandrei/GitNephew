@@ -4,10 +4,13 @@ var bodyParser = require('body-parser');
 var bcrypt = require('bcrypt-nodejs');
 var mongoose = require('mongoose');
 var jwt = require('jsonwebtoken');
-var fetch = require('node-fetch');
+const { gatherData } = require("./git_fetch");
+const userDB = require('./UserSchema');
 var router = express.Router();
 
-mongoose.connect('mongodb+srv://reversio:elcomandante@edociif-5wsli.gcp.mongodb.net/test?retryWrites=true', { useNewUrlParser: true })
+let udb = userDB;
+
+mongoose.connect('mongodb+srv://omaygad:elcomandante@edociif-5wsli.gcp.mongodb.net/test?retryWrites=true', { useNewUrlParser: true })
     .catch(function (err) {
         console.log(err);
     });
@@ -17,18 +20,19 @@ var app = express();
 app.use(cors());
 app.use(bodyParser.urlencoded({ extended: false }));
 app.use(bodyParser.json());
-
-var user = require('./UserSchema.js');
 app.use(express.static('frontend', {
     extensions: ['html', 'htm']
 }));
 
 app.post('/register', function (req, res) {
+    console.log(req.body);
     var data = req.body;
+    console.log(data);
     if (data !== '{}') {
         bcrypt.hash(data.password, null, null, function (err, hash) {
             data.password = hash;
-            var newUser = new user.user(data);
+            var newUser = new udb.user(data);
+            console.log(newUser);
             newUser.save(function (err) {
                 if (err)
                     res.send({
@@ -45,15 +49,19 @@ app.post('/register', function (req, res) {
     }
 });
 
+
+
 app.post('/login', function (req, res) {
     var data = req.body;
 
-    user.user.findOne({ username: data.username }, function (err, user) {
+    userDB.user.findOne({ username: data.username }, function (err, user) {
         if (err)
             res.send({
                 success: false,
                 message: err._message
             });
+
+
         else if (user) {
             bcrypt.compare(data.password, user.password, function (err, response) {
                 if (err)
@@ -62,6 +70,8 @@ app.post('/login', function (req, res) {
                     var payload = {
                         username: data.username
                     };
+
+
                     var token = jwt.sign(payload, 'dfhdrfydrtd', { expiresIn: '1h' });
                     if (token !== '')
                         res.send({
@@ -83,54 +93,32 @@ app.post('/login', function (req, res) {
     });
 });
 
-router.use(function(req, res, next) {
+app.post('/git', function (req, res) {
+    gatherData('funchal').then(data => {
+        //further db inplementation
+        parsedData = data;
+        res.send(data);
+    })
+
+});
+
+
+
+router.use(function (req, res, next) {
     var token = req.headers['Authorization'];
     console.log(token);
     var split = token.split(' ');
-    jwt.verify(split[1], 'dfhdrfydrtd', function(err, decoded) {
-        if(err)
+    jwt.verify(split[1], 'dfhdrfydrtd', function (err, decoded) {
+        if (err)
             console.warn(err);
         else
-            if(decoded)
+            if (decoded)
                 next();
     });
 });
 
-router.post('/git', function (req, response) {
-    let countRepos = [];
-    let userData = {
-        projectNames: '',
-        projectCount: '',
-    };
 
-    fetch('https://api.github.com/users/funchal/repos', {
-        headers: {
-            "Content-Type": "application/json",
-            "Authorization": 'token b4fec8be06201d9277b3cac763786b4d60a65923'
-        },
-    })
-        .then(res => res.json()) // expecting a json response
-        .then(json => {
-            for (var i in json) {
-                countRepos.push(json[i].name);
-            }
-            userData.projectNames = countRepos;
-            userData.projectCount = json.length - 1;
-            console.log(userData);
-            var gitUser = new user.gitData(userData);
-            gitUser.save(function(err) {
-                if(err)
-                    console.log(err);
-                else {
-                    response.send({
-                        success: true,
-                        message: 'Success',
-                        userData
-                    });
-                }
-            });
-        });
-});
+
 
 app.use('/admin', router);
 app.listen('4000');

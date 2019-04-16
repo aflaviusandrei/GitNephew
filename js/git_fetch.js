@@ -3,7 +3,7 @@ const fetch = require('node-fetch');
 
 async function fetchUserData(username) {
   const res = await fetch
-    ('https://api.github.com/users/' + username, {
+    (`https://api.github.com/users/${username}`, {
       headers: {
         "Content-Type": "application/json",
         "Authorization": 'token b4fec8be06201d9277b3cac763786b4d60a65923'
@@ -24,7 +24,7 @@ async function fetchUserData(username) {
 
 async function fetchRepos(username) {
   const res = await fetch
-    ('https://api.github.com/users/' + username + "/repos", {
+    (`https://api.github.com/users/${username}/repos`, {
       headers: {
         "Content-Type": "application/json",
         "Authorization": 'token b4fec8be06201d9277b3cac763786b4d60a65923'
@@ -35,21 +35,16 @@ async function fetchRepos(username) {
   for (var i in data) {
     repos.push(data[i].name);
   }
-  return await (repos);
+  return (repos);
 }
 
 
 async function gatherData(username) {
-  //let x = await fetchUserData(username);
-  //let y = await fetchRepos(username);
-
-  let data = {
+  console.log('now returning');
+  return {
     userData: await fetchUserData(username),
     repoData: await fetchRepos(username),
-
   }
-
-  return data;
 }
 
 /*
