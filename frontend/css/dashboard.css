@@ -29,6 +29,7 @@ body {
 #dashboard-area {
     height: 90vh;
     display: flex;
+    border-top: 1px solid black;
 }
 
 #dashboard-nav {
@@ -88,10 +89,11 @@ body {
     margin: auto;
 }
 
-#dashboard-display {
+.dashboard-display {
     width: 80%;
     border-top: 1px solid #bdc3c7;
     background: #ecf0f1;
+    display: none;
 }
 
 #dashboard-nav > h3 {
@@ -158,6 +160,7 @@ body {
 #member-details {
     display: flex;
     flex-direction: column;
+    position: relative;
 }
 #member-details form {
     display: flex;
@@ -276,6 +279,46 @@ body {
     padding: 10px;
     margin: 10px;
 }
+.loading-container {
+    display: flex !important;
+}
+#loader-container {
+    display: none;
+    position: absolute;
+    top: 0;
+    left: 0;
+    background: white;
+    width: 100%;
+    height: 100%;
+}
+#loader {
+    border: 8px solid #f3f3f3;
+    border-radius: 50%;
+    border-top: 8px solid #3498db;
+    width: 90px;
+    height: 90px;
+    -webkit-animation: spin 2s linear infinite; /* Safari */
+    animation: spin 2s linear infinite;
+    margin: auto;
+  }
+  
+  /* Safari */
+  @-webkit-keyframes spin {
+    0% { -webkit-transform: rotate(0deg); }
+    100% { -webkit-transform: rotate(360deg); }
+  }
+  
+  @keyframes spin {
+    0% { transform: rotate(0deg); }
+    100% { transform: rotate(360deg); }
+  }
+.picked-dash {
+    display: block !important;
+}
+.picked-nav {
+    background: #d7dbdc !important;
+    border: 2px solid black !important;
+}
 .profilepic {
     border-radius: 100%;
     background:url("portrait.jpg");
@@ -297,7 +340,7 @@ body {
     #dashboard-nav ul {
         margin: 20px auto 20px auto;
     }
-    #dashboard-display {
+    .dashboard-display {
         width: 100%;
     }
     .stats-main {
