@@ -321,7 +321,6 @@ body {
 }
 .profilepic {
     border-radius: 100%;
-    background:url("portrait.jpg");
     background-repeat: no-repeat;
     background-size: cover;
     width: 100px;

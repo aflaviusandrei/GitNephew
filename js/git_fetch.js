@@ -12,11 +12,14 @@ async function fetchUserData(username) {
 
   const data = await res.json();
 
+  console.log(data);
+
   let userData = {
     name: data.name,
     location: data.location,
     repos: data.public_repos,
-    followers: data.followers
+    followers: data.followers,
+    avatar_url: data.avatar_url
   }
   return await (userData);
 }

@@ -15,6 +15,7 @@ function repopulate() {
     var repoNr = document.getElementsByClassName("reponr");
     var followers = document.getElementsByClassName("followers");
     var profileName = document.getElementsByClassName("profilename");
+    var profilePic = document.getElementsByClassName("profilepic");
     var projectList = document.getElementsByClassName("list-stat");
     var data = memberDataArr[memberDataArr.length - 1];
 
@@ -23,6 +24,9 @@ function repopulate() {
     followers[followers.length - 1].innerText = data.userData.followers;
 
     profileName[profileName.length - 1].innerText = data.userData.name;
+
+    profilePic[profilePic.length - 1].style.background = "url('" + data.userData.avatar_url + "')";
+    profilePic[profilePic.length - 1].style.backgroundSize = "cover";
 
     for (var i = 0; i < data.repoData.length; i++) {
         var div = document.createElement("div");
