@@ -14,10 +14,12 @@ document.addEventListener('DOMContentLoaded', function () {
         })
             .then(function (res) {
                 return res.json();
+
             })
             .then(function (res) {
+                console.log(res);
                 if (res.success) {
-                    if (window.localStorage.getItem('token') !== null)
+                    if (window.localStorage.getItem('token') === null)
                         window.localStorage.setItem('token', res.token);
                     alert(res.message);
                 }

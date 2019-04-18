@@ -75,17 +75,13 @@ app.post('/login', function (req, res) {
 
                     jwt.sign({ payload }, 'murePeSeDe', { expiresIn: '10m' }, (err, token) => {
                         res.json({
-                            token
+                            token,
+                            success: true
                         })
+                        console.log(token);
                     });
 
-                    // var token = jwt.sign(payload, 'dfhdrfydrtd', { expiresIn: '1h' });
-                    // if (token !== '')
-                    //     res.send({
-                    //         success: true,
-                    //         message: 'Succesfully authenticated',
-                    //         token: token
-                    //     });
+
                 } else
                     res.send({
                         success: false,
@@ -102,7 +98,7 @@ app.post('/login', function (req, res) {
 
 app.post('/git', tokenify, function (req, res) {
 
-    console.log(req.body);
+
     gatherData(req.body.username).then(data => {
         //further db inplementation
         res.send(data);
@@ -112,24 +108,26 @@ app.post('/git', tokenify, function (req, res) {
 
 
 function tokenify(req, res, next) {
-    jwt.verify(req.token, 'murePeSeDe', (err, authData) => {
-        const hBearer = req.headers['authorization'];
+    let hBearer = req.headers['x-access-token'] || req.headers['authorization'];
+    if (typeof hBearer !== 'undefined') {
+        const bearer = hBearer.split(' ');
 
-        if (typeof hBearer !== 'undefined') {
-            const bearer = hBearer.split(' ');
+        const token = bearer[1];
+        jwt.verify(token, 'murePeSeDe', (err, authData) => {
+            if (err) {
+                res.sendStatus(403);
+            } else {
+                req.token = token
+                next();
+            }
 
-            const token = bearer[1];
+        });
 
-            req.token = token;
+    } else {
+        res.sendStatus(403);
+    }
 
-            next();
-
-        } else {
-            res.sendStatus(403);
-        }
-    });
 }
-
 
 
 app.use('/admin', router);

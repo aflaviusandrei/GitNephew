@@ -141,14 +141,14 @@ addNew.onclick = function () {
     var url = '/git';
     var data = { username: nepGit.value, name: nepName.value };
     var bToken = window.localStorage.getItem('token');
-
+    console.log(bToken);
     fetch(url, {
 
         method: 'POST',
         body: JSON.stringify(data),
         headers: {
             'Content-Type': 'application/json',
-            'Authorization': `token + ${bToken}`
+            'Authorization': `token ${bToken}`
         }
     }).then(res => res.json())
         .then(response => {
