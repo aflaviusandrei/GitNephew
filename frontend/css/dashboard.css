@@ -259,6 +259,37 @@ body {
 .stat-info > * {
     margin: auto;
 }
+.repo-list {
+    display: flex;
+    flex-wrap: wrap;
+}
+.indiv-repo {
+    width: 20%;
+    height: 200px;
+    display: flex;
+    color: black;
+    padding: 20px;
+    border-left: 1px solid black;
+    border-top: 1px solid black;
+}
+.indiv-repo:nth-of-type(5n + 0) {
+    border-right: 1px solid black;
+}
+.indiv-repo:last-child {
+    border-right: 1px solid black;
+}
+.indiv-repo:nth-last-child(-n+5) {
+    border-bottom: 1px solid black;
+}
+.indiv-repo > p {
+    margin: auto;
+    text-align: center;
+    text-transform: uppercase;
+}
+.indiv-repo:hover {
+    text-decoration: none;
+    background: #ecf0f1;
+}
 .stat > span {
     text-transform: uppercase;
     font-weight: 700;
@@ -363,8 +394,4 @@ body {
     font-weight: 700;
     font-size: 0.9em;
     color: #95a5a6;
-}
-.list-stat > div {
-    padding: 10px;
-    border-bottom: 1px solid #95a5a6;
 }

@@ -67,7 +67,11 @@ async function fetchRepos(username) {
   const data = await res.json();
   var repos = [];
   for (var i in data) {
-    repos.push(data[i].name);
+    let repo = {
+      repoName: data[i].name,
+      repoURL: data[i].html_url
+    }
+    repos.push(repo);
   }
   return (repos);
 }

@@ -10,15 +10,15 @@ if (window.innerWidth <= 600) {
 }
 
 function repopulate() {
-    var events = document.getElementsByClassName("eventsnr");
-    var repoNr = document.getElementsByClassName("reponr");
-    var followers = document.getElementsByClassName("followers");
-    var profileName = document.getElementsByClassName("profilename");
-    var profilePic = document.getElementsByClassName("profilepic");
-    var projectList = document.getElementsByClassName("list-stat");
-    var totalPushes = document.getElementsByClassName("pushestotal");
-    var totalCommits = document.getElementsByClassName("commitstotal");
-    var lastActive = document.getElementsByClassName("lastactive");
+    var events = document.getElementsByClassName("eventsnr"),
+        repoNr = document.getElementsByClassName("reponr"),
+        followers = document.getElementsByClassName("followers"),
+        profileName = document.getElementsByClassName("profilename"),
+        profilePic = document.getElementsByClassName("profilepic"),
+        projectList = document.getElementsByClassName("repo-list"),
+        totalPushes = document.getElementsByClassName("pushestotal"),
+        totalCommits = document.getElementsByClassName("commitstotal"),
+        lastActive = document.getElementsByClassName("lastactive");
 
     var data = memberDataArr[memberDataArr.length - 1];
 
@@ -38,11 +38,13 @@ function repopulate() {
     profilePic[profilePic.length - 1].style.backgroundSize = "cover";
 
     for (var i = 0; i < data.repoData.length; i++) {
-        var div = document.createElement("div");
+        var a = document.createElement("a");
         var p = document.createElement("p");
-        p.innerText = data.repoData[i];
-        div.appendChild(p);
-        projectList[projectList.length - 1].appendChild(div);
+        p.innerText = data.repoData[i].repoName;
+        a.setAttribute("href", data.repoData[i].repoURL);
+        a.classList.add("indiv-repo");
+        a.appendChild(p);
+        projectList[projectList.length - 1].appendChild(a);
     }
 
     var loader = document.getElementById("loader-container");
