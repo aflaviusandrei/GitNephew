@@ -24,6 +24,37 @@ async function fetchUserData(username) {
   return await (userData);
 }
 
+async function fetchEvents(username) {
+  const res = await fetch
+    (`https://api.github.com/users/${username}/events`, {
+      headers: {
+        "Content-Type": "application/json",
+        "Authorization": 'token b4fec8be06201d9277b3cac763786b4d60a65923'
+      },
+    })
+  const data = await res.json();
+
+  // Count total events of different types
+  let tp = 0, tc = 0, la;
+
+  for (let i = 0; i < data.length; i++) {
+    if (data[i].type === "PushEvent") {
+      tc += data[i].payload.commits.length;
+      tp++;
+    }
+  }
+
+  la = data[0].created_at.substring(0, 10);
+  la.replace("-", ".");
+
+  return ({
+    totalPushes: tp,
+    totalCommits: tc,
+    lastActivity: la,
+    raw: data
+  });
+
+}
 
 async function fetchRepos(username) {
   const res = await fetch
@@ -47,6 +78,7 @@ async function gatherData(username) {
   return {
     userData: await fetchUserData(username),
     repoData: await fetchRepos(username),
+    eventsData: await fetchEvents(username)
   }
 }
 

@@ -11,12 +11,15 @@ if (window.innerWidth <= 600) {
 
 function repopulate() {
     var events = document.getElementsByClassName("eventsnr");
-    var lastActive = document.getElementsByClassName("lastactive");
     var repoNr = document.getElementsByClassName("reponr");
     var followers = document.getElementsByClassName("followers");
     var profileName = document.getElementsByClassName("profilename");
     var profilePic = document.getElementsByClassName("profilepic");
     var projectList = document.getElementsByClassName("list-stat");
+    var totalPushes = document.getElementsByClassName("pushestotal");
+    var totalCommits = document.getElementsByClassName("commitstotal");
+    var lastActive = document.getElementsByClassName("lastactive");
+
     var data = memberDataArr[memberDataArr.length - 1];
 
     repoNr[repoNr.length - 1].innerText = data.userData.repos;
@@ -24,6 +27,12 @@ function repopulate() {
     followers[followers.length - 1].innerText = data.userData.followers;
 
     profileName[profileName.length - 1].innerText = data.userData.name;
+
+    totalCommits[totalCommits.length - 1].innerText = data.eventsData.totalCommits;
+
+    totalPushes[totalPushes.length - 1].innerText = data.eventsData.totalPushes;
+
+    lastActive[lastActive.length - 1].innerText = data.eventsData.lastActivity;
 
     profilePic[profilePic.length - 1].style.background = "url('" + data.userData.avatar_url + "')";
     profilePic[profilePic.length - 1].style.backgroundSize = "cover";
@@ -141,6 +150,7 @@ addNew.onclick = function () {
         createNephew();
         memberDataArr.push(response);
         repopulate();
+        console.log(memberDataArr);
         nepName.value = nepGit.value = "";
     })
     .catch(error => console.error('Error:', error));

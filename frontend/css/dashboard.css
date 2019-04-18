@@ -259,9 +259,6 @@ body {
 .stat-info > * {
     margin: auto;
 }
-.stat-info > h1 {
-    font-size: 4em;
-}
 .stat > span {
     text-transform: uppercase;
     font-weight: 700;
