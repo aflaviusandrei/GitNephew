@@ -56,11 +56,11 @@ function repopulate() {
 
 // Register new nephew functionality
 
-    // Clone nephew dash area and remove from DOM
-    var dashDisplay = document.getElementsByClassName("dashboard-display")[0].cloneNode([true]);
-    var dashIcon = document.getElementsByClassName("nephew-side-box")[0].cloneNode([true]);
-    document.getElementsByClassName("nephew-side-box")[0].parentNode.removeChild(document.getElementsByClassName("nephew-side-box")[0]);
-    document.getElementsByClassName("dashboard-display")[0].parentNode.removeChild(document.getElementsByClassName("dashboard-display")[0]);
+// Clone nephew dash area and remove from DOM
+var dashDisplay = document.getElementsByClassName("dashboard-display")[0].cloneNode([true]);
+var dashIcon = document.getElementsByClassName("nephew-side-box")[0].cloneNode([true]);
+document.getElementsByClassName("nephew-side-box")[0].parentNode.removeChild(document.getElementsByClassName("nephew-side-box")[0]);
+document.getElementsByClassName("dashboard-display")[0].parentNode.removeChild(document.getElementsByClassName("dashboard-display")[0]);
 
 var tryButton = document.getElementById("add-member"),
     regArea = document.getElementById("getstarted"),
@@ -78,7 +78,7 @@ var addNew = document.getElementById("add-new-button"),
     addContainer = document.getElementById("add-member");
 
 function createNephew(data) {
-    
+
     var dashArea = document.getElementById("dashboard-area"),
         prevPicked = document.getElementsByClassName("picked-dash")[0];
 
@@ -95,7 +95,7 @@ function createNephew(data) {
 function nephewNavigation() {
     var nephewButtons = document.getElementsByClassName("nephew-side-box");
 
-    function findIndex (but) {
+    function findIndex(but) {
         var k = 0;
 
         while (nephewButtons[k] != but) k++;
@@ -104,7 +104,7 @@ function nephewNavigation() {
     }
 
     for (var i = 0; i < nephewButtons.length; i++) {
-        nephewButtons[i].onclick = function() {
+        nephewButtons[i].onclick = function () {
             var prevPickedNav = document.getElementsByClassName("picked-nav")[0];
             var prevPickedDash = document.getElementsByClassName("picked-dash")[0];
             var dashes = document.getElementsByClassName("dashboard-display");
@@ -139,23 +139,26 @@ addNew.onclick = function () {
     // Request data for new nephew
 
     var url = '/git';
-    var data = {username: nepGit.value, name:nepName.value};
+    var data = { username: nepGit.value, name: nepName.value };
+    var bToken = window.localStorage.getItem('token');
 
     fetch(url, {
-      method: 'POST',
-      body: JSON.stringify(data),
-      headers:{
-        'Content-Type': 'application/json'
-      }
+
+        method: 'POST',
+        body: JSON.stringify(data),
+        headers: {
+            'Content-Type': 'application/json',
+            'Authorization': `token + ${bToken}`
+        }
     }).then(res => res.json())
-    .then(response => {
-        createNephew();
-        memberDataArr.push(response);
-        repopulate();
-        console.log(memberDataArr);
-        nepName.value = nepGit.value = "";
-    })
-    .catch(error => console.error('Error:', error));
+        .then(response => {
+            createNephew();
+            memberDataArr.push(response);
+            repopulate();
+            console.log(memberDataArr);
+            nepName.value = nepGit.value = "";
+        })
+        .catch(error => console.error('Error:', error));
 }
 
 

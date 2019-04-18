@@ -54,6 +54,7 @@ app.post('/register', function (req, res) {
 app.post('/login', function (req, res) {
     var data = req.body;
 
+
     userDB.user.findOne({ username: data.username }, function (err, user) {
         if (err)
             res.send({
@@ -72,13 +73,19 @@ app.post('/login', function (req, res) {
                     };
 
 
-                    var token = jwt.sign(payload, 'dfhdrfydrtd', { expiresIn: '1h' });
-                    if (token !== '')
-                        res.send({
-                            success: true,
-                            message: 'Succesfully authenticated',
-                            token: token
-                        });
+                    jwt.sign({ payload }, 'murePeSeDe', { expiresIn: '10m' }, (err, token) => {
+                        res.json({
+                            token
+                        })
+                    });
+
+                    // var token = jwt.sign(payload, 'dfhdrfydrtd', { expiresIn: '1h' });
+                    // if (token !== '')
+                    //     res.send({
+                    //         success: true,
+                    //         message: 'Succesfully authenticated',
+                    //         token: token
+                    //     });
                 } else
                     res.send({
                         success: false,
@@ -93,7 +100,8 @@ app.post('/login', function (req, res) {
     });
 });
 
-app.post('/git', function (req, res) {
+app.post('/git', tokenify, function (req, res) {
+
     console.log(req.body);
     gatherData(req.body.username).then(data => {
         //further db inplementation
@@ -103,20 +111,24 @@ app.post('/git', function (req, res) {
 });
 
 
+function tokenify(req, res, next) {
+    jwt.verify(req.token, 'murePeSeDe', (err, authData) => {
+        const hBearer = req.headers['authorization'];
 
-router.use(function (req, res, next) {
-    var token = req.headers['Authorization'];
-    console.log(token);
-    var split = token.split(' ');
-    jwt.verify(split[1], 'dfhdrfydrtd', function (err, decoded) {
-        if (err)
-            console.warn(err);
-        else
-            if (decoded)
-                next();
+        if (typeof hBearer !== 'undefined') {
+            const bearer = hBearer.split(' ');
+
+            const token = bearer[1];
+
+            req.token = token;
+
+            next();
+
+        } else {
+            res.sendStatus(403);
+        }
     });
-});
-
+}
 
 
 
