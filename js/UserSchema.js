@@ -17,26 +17,12 @@ var gitDataSchema = new mongoose.Schema({
     login: {type: 'String'},
     bunic: {type: 'String'}
 	},
-	repoData: {
-		type: [
-			'Mixed'
-		]
-	},
+	repoData: { type: ['Mixed']},
 	eventsData: {
-		totalPushes: {
-			type: 'Number'
-		},
-		totalCommits: {
-			type: 'Number'
-		},
-		lastActivity: {
-			type: 'Date'
-		},
-		raw: {
-			type: [
-				'Mixed'
-			]
-		}
+    totalPushes: {type: 'Number'},
+		totalCommits: {type: 'Number'},
+		lastActivity: {type: 'Date'},
+		raw: {type: ['Mixed']}
   },
   bunic: {type: 'String'}
 });
