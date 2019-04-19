@@ -116,18 +116,13 @@ app.post('/git', tokenify, function (req, res) {
 });
 
 app.post('/db', function (req, res) {
-    let hBearer = req.headers['x-access-token'] || req.headers['authorization'];
-    if (typeof hBearer !== 'undefined') {
-        const bearer = hBearer.split(' ');
-
-        const token = bearer[1];
+        const token = auth(req);
         var decoded = jwt.verify(token, 'murePeSeDe');
         console.log(decoded.payload.username);
         userDB.gitData.find({ bunic: decoded.payload.username }, function (err, user) {
             console.log(`${user} + on database right now`);
             res.send(user);
         });
-    }
 });
 
 function auth(req, res) {

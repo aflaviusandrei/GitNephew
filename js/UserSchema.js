@@ -15,7 +15,7 @@ var gitDataSchema = new mongoose.Schema({
 		followers: { type: 'Number'},
 		avatar_url: { type: 'String'},
     login: {type: 'String'},
-    bunic: {type: 'String'}
+    bunic: {type: 'String'},
 	},
 	repoData: { type: ['Mixed']},
 	eventsData: {
@@ -25,7 +25,7 @@ var gitDataSchema = new mongoose.Schema({
 		raw: {type: ['Mixed']}
   },
   bunic: {type: 'String'}
-});
+}, {unique:true});
 
 UserSchema.plugin(uniqueValidator, {message: 'already exists.'});
 
