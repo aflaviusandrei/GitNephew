@@ -19,7 +19,8 @@ async function fetchUserData(username) {
     location: data.location,
     repos: data.public_repos,
     followers: data.followers,
-    avatar_url: data.avatar_url
+    avatar_url: data.avatar_url,
+    login: data.login
   }
   return await (userData);
 }

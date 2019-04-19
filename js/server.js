@@ -98,13 +98,52 @@ app.post('/login', function (req, res) {
 
 app.post('/git', tokenify, function (req, res) {
 
-
     gatherData(req.body.username).then(data => {
         //further db inplementation
+        let x = auth(req, res);
+        let bunic = jwt.verify(x, 'murePeSeDe');
+        console.log(bunic);
+        data.bunic = bunic.payload.username;
         res.send(data);
+        res.end(200);
+        var newChild = new udb.gitData(data);
+        newChild.save((err) => {
+            if (err) {
+                console.log(err)
+            }
+        })
     })
-
 });
+
+app.post('/db', function (req, res) {
+    let hBearer = req.headers['x-access-token'] || req.headers['authorization'];
+    if (typeof hBearer !== 'undefined') {
+        const bearer = hBearer.split(' ');
+
+        const token = bearer[1];
+        var decoded = jwt.verify(token, 'murePeSeDe');
+        console.log(decoded.payload.username);
+        userDB.gitData.find({ bunic: decoded.payload.username }, function (err, user) {
+            console.log(`${user} + on database right now`);
+            res.send(user);
+        });
+    }
+});
+
+function auth(req, res) {
+    let hBearer = req.headers['x-access-token'] || req.headers['authorization'];
+
+    if (typeof hBearer !== 'undefined') {
+
+        const bearer = hBearer.split(' ');
+        const token = bearer[1];
+
+        return token;
+    }
+}
+
+//TODO: CLEAN FUNCTIONS!!!
+
 
 
 function tokenify(req, res, next) {
@@ -120,7 +159,6 @@ function tokenify(req, res, next) {
                 req.token = token
                 next();
             }
-
         });
 
     } else {

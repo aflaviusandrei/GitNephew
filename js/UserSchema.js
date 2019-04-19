@@ -8,9 +8,37 @@ var UserSchema = new mongoose.Schema({
 }, {timestamps: true});
 
 var gitDataSchema = new mongoose.Schema({
-  parent: {type: String},
-  projectNames: { type: Array },
-  projectCount: { type: Number }
+  userData: {
+		name: { type: 'Mixed'},
+		location: { type: 'String'},
+		repos: {type: 'Number'},
+		followers: { type: 'Number'},
+		avatar_url: { type: 'String'},
+    login: {type: 'String'},
+    bunic: {type: 'String'}
+	},
+	repoData: {
+		type: [
+			'Mixed'
+		]
+	},
+	eventsData: {
+		totalPushes: {
+			type: 'Number'
+		},
+		totalCommits: {
+			type: 'Number'
+		},
+		lastActivity: {
+			type: 'Date'
+		},
+		raw: {
+			type: [
+				'Mixed'
+			]
+		}
+  },
+  bunic: {type: 'String'}
 });
 
 UserSchema.plugin(uniqueValidator, {message: 'already exists.'});
