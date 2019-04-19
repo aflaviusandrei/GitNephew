@@ -21,8 +21,8 @@ var gitDataSchema = new mongoose.Schema({
 	eventsData: {
     totalPushes: {type: 'Number'},
 		totalCommits: {type: 'Number'},
-		lastActivity: {type: 'Date'},
-		raw: {type: ['Mixed']}
+		lastActivity: {type: 'Date'}
+		//raw: {type: ['Mixed']}
   },
   bunic: {type: 'String'}
 }, {unique:true});

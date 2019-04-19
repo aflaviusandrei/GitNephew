@@ -52,7 +52,7 @@ async function fetchEvents(username) {
     totalPushes: tp,
     totalCommits: tc,
     lastActivity: la,
-    raw: data
+   // raw: data
   });
 
 }
@@ -62,7 +62,7 @@ async function fetchRepos(username) {
     (`https://api.github.com/users/${username}/repos`, {
       headers: {
         "Content-Type": "application/json",
-        "Authorization": 'token b4fec8be06201d9277b3cac763786b4d60a65923'
+        "Authorization": 'token b4fec8be06201d9277b3cac763786b4d60a65923' 
       },
     })
   const data = await res.json();

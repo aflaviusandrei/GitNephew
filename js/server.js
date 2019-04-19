@@ -1,12 +1,12 @@
-var express = require('express');
-var cors = require('cors');
-var bodyParser = require('body-parser');
-var bcrypt = require('bcrypt-nodejs');
-var mongoose = require('mongoose');
-var jwt = require('jsonwebtoken');
+let express = require('express');
+let cors = require('cors');
+let bodyParser = require('body-parser');
+let bcrypt = require('bcrypt-nodejs');
+let mongoose = require('mongoose');
+let jwt = require('jsonwebtoken');
 const { gatherData } = require("./git_fetch");
 const userDB = require('./UserSchema');
-var router = express.Router();
+let router = express.Router();
 
 let udb = userDB;
 
@@ -15,7 +15,7 @@ mongoose.connect('mongodb+srv://omaygad:elcomandante@edociif-5wsli.gcp.mongodb.n
         console.log(err);
     });
 
-var app = express();
+let app = express();
 
 app.use(cors());
 app.use(bodyParser.urlencoded({ extended: false }));
@@ -26,12 +26,12 @@ app.use(express.static('frontend', {
 
 app.post('/register', function (req, res) {
     console.log(req.body);
-    var data = req.body;
+    let data = req.body;
     console.log(data);
     if (data !== '{}') {
         bcrypt.hash(data.password, null, null, function (err, hash) {
             data.password = hash;
-            var newUser = new udb.user(data);
+            let newUser = new udb.user(data);
             console.log(newUser);
             newUser.save(function (err) {
                 if (err)
@@ -52,7 +52,7 @@ app.post('/register', function (req, res) {
 
 
 app.post('/login', function (req, res) {
-    var data = req.body;
+    let data = req.body;
 
 
     userDB.user.findOne({ username: data.username }, function (err, user) {
@@ -68,7 +68,7 @@ app.post('/login', function (req, res) {
                 if (err)
                     console.warn(err._message);
                 else if (response) {
-                    var payload = {
+                    let payload = {
                         username: data.username
                     };
 
@@ -100,13 +100,16 @@ app.post('/git', tokenify, function (req, res) {
 
     gatherData(req.body.username).then(data => {
         //further db inplementation
-        let x = auth(req, res);
-        let bunic = jwt.verify(x, 'murePeSeDe');
-        console.log(bunic);
+        let x = auth(req);
+        const bunic = jwt.verify(x, 'murePeSeDe'); //console.log(bunic);
+
         data.bunic = bunic.payload.username;
+
         res.send(data);
         res.end(200);
-        var newChild = new udb.gitData(data);
+
+        let newChild = new udb.gitData(data);
+
         newChild.save((err) => {
             if (err) {
                 console.log(err)
@@ -117,15 +120,17 @@ app.post('/git', tokenify, function (req, res) {
 
 app.post('/db', function (req, res) {
         const token = auth(req);
-        var decoded = jwt.verify(token, 'murePeSeDe');
+        const decoded = jwt.verify(token, 'murePeSeDe');
+
         console.log(decoded.payload.username);
+
         userDB.gitData.find({ bunic: decoded.payload.username }, function (err, user) {
             console.log(`${user} + on database right now`);
             res.send(user);
-        });
+        }); 
 });
 
-function auth(req, res) {
+function auth(req) {
     let hBearer = req.headers['x-access-token'] || req.headers['authorization'];
 
     if (typeof hBearer !== 'undefined') {
@@ -143,6 +148,7 @@ function auth(req, res) {
 
 function tokenify(req, res, next) {
     let hBearer = req.headers['x-access-token'] || req.headers['authorization'];
+
     if (typeof hBearer !== 'undefined') {
         const bearer = hBearer.split(' ');
 
