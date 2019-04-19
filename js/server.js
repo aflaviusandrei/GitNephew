@@ -125,7 +125,7 @@ app.post('/db', function (req, res) {
         console.log(decoded.payload.username);
 
         userDB.gitData.find({ bunic: decoded.payload.username }, function (err, user) {
-            console.log(`${user} + on database right now`);
+            //console.log(`${user} + on database right now`);
             res.send(user);
         }); 
 });
