@@ -4,7 +4,6 @@ document.addEventListener('DOMContentLoaded', function () {
     form.addEventListener('submit', function (e) {
         e.preventDefault();
         var data = formToJSON(this);
-        console.log(data);
         fetch('/login', {
             method: 'POST',
             headers: {
@@ -17,11 +16,10 @@ document.addEventListener('DOMContentLoaded', function () {
 
             })
             .then(function (res) {
-                console.log(res);
                 if (res.success) {
-                    if (window.localStorage.getItem('token') === null)
+                    if (window.localStorage.getItem('token') === "null")
                         window.localStorage.setItem('token', res.token);
-                    alert(res.message);
+                        location.reload();
                 }
             });
     });

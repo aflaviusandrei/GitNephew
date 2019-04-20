@@ -112,7 +112,7 @@ body {
 }
 
 .account-dropdown {
-    height: 200px;
+    height: auto;
     width: 200px;
     border-radius: 3px;
     background: #ecf0f1;
@@ -132,6 +132,20 @@ body {
 }
 .account-dropdown > p {
     background: #bdc3c7;
+    font-weight: 700;
+    padding: 10px;
+}
+.account-dropdown ul {
+    padding: 5px;
+}
+.account-dropdown ul li {
+    text-align: center;
+    width: 100%;
+    margin: 0 !important;
+}
+.account-dropdown ul li a {
+    cursor: pointer;
+    text-transform: uppercase;
 }
 #user-section {
     width: 60%;

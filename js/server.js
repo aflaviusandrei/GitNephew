@@ -73,7 +73,7 @@ app.post('/login', function (req, res) {
                     };
 
 
-                    jwt.sign({ payload }, 'murePeSeDe', { expiresIn: '10m' }, (err, token) => {
+                    jwt.sign({ payload }, 'murePeSeDe', { expiresIn: '24h' }, (err, token) => {
                         res.json({
                             token,
                             success: true

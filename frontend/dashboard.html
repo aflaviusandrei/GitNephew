@@ -16,7 +16,10 @@
     <link rel="stylesheet"
           href="css/index.css">
     <script>
-          if (window.localStorage.getItem('token') === null) window.location.replace("/");
+          if (window.localStorage.getItem("token") === "null") {
+              console.log("user not logged in");
+              window.location.replace("/");
+          }
     </script>
 
 </head>
@@ -32,9 +35,9 @@
                 <li class="header-user">
                     <a href="#"><i class="material-icons">account_circle</i></a>
                     <div class="account-dropdown">
-                        <p>Logged in as:</p>
+                        <p>Logged in as:&nbsp;<span id="username"></span></p>
                         <ul>
-                            <li>Log out</li>
+                            <li><a id="logout">Log out</a></li>
                         </ul>
                     </div>
                 </li>

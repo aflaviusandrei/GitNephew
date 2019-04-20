@@ -65,7 +65,36 @@ document.getElementsByClassName("dashboard-display")[0].parentNode.removeChild(d
 var tryButton = document.getElementById("add-member"),
     regArea = document.getElementById("getstarted"),
     closeReg = document.getElementById("close-reg"),
-    memberDataArr = [];
+    memberDataArr = [], dbNeps = [];
+
+function loadFromDB() {
+    for (var i = 0; i < dbNeps.length; i++) {
+        dbNeps[i].eventsData.lastActivity = dbNeps[i].eventsData.lastActivity.substring(0, 10);
+
+        var prevPickedNav = document.getElementsByClassName("picked-nav")[0];
+
+        memberDataArr.push(dbNeps[i]);
+    
+        tryButton.parentNode.insertBefore(dashIcon, tryButton);
+        if (prevPickedNav) prevPickedNav.classList.remove("picked-nav");
+        dashIcon.classList.add("picked-nav");
+        dashIcon = tryButton.previousElementSibling.cloneNode([true]);
+        let a = document.getElementsByClassName("nephew-name");
+        a[a.length - 1].innerHTML = i;
+    
+        createNephew();
+        repopulate();
+        nephewNavigation();
+    }
+
+    var prevPickedNav = document.getElementsByClassName("picked-nav"),
+        pickedDash = document.getElementsByClassName("picked-dash");
+
+    if (pickedDash) pickedDash[0].classList.remove("picked-dash");
+    if (prevPickedNav) prevPickedNav[prevPickedNav.length - 1].classList.remove("picked-nav");
+    document.getElementsByClassName("nephew-side-box")[0].classList.add("picked-nav");
+    document.getElementsByClassName("dashboard-display")[0].classList.add("picked-dash");
+}
 
 function toggleReg() {
     regArea.classList.toggle("open-reg");
@@ -118,6 +147,8 @@ function nephewNavigation() {
     }
 }
 
+var bToken = window.localStorage.getItem('token');
+
 addNew.onclick = function () {
     var nepName = document.getElementById("nephew-name-input"),
         nepGit = document.getElementById("nephew-github"),
@@ -140,18 +171,6 @@ addNew.onclick = function () {
 
     var url = '/git';
     var data = { username: nepGit.value, name: nepName.value };
-    var bToken = window.localStorage.getItem('token');
-
-    fetch('/db', {
-
-        method: 'POST',
-        body: JSON.stringify(data),
-        headers: {
-            'Content-Type': 'application/json',
-            'Authorization': `token ${bToken}`
-        }
-    });
-
 
     console.log(bToken);
     fetch(url, {
@@ -173,26 +192,27 @@ addNew.onclick = function () {
         .catch(error => console.error('Error:', error));
 }
 
+fetch('/db', {
+    method: 'POST',
+    body: "",
+    headers: {
+        'Content-Type': 'application/json',
+        'Authorization': `token ${bToken}`
+    }
+}).then(res => res.json())
+.then(response => {
+    dbNeps = response;
+    console.log(dbNeps);
+    loadFromDB();
+    document.getElementById("username").innerText = dbNeps[0].bunic;
+})
+.catch(error => console.error('Error:', error));
 
+// LOG OUT FUNCTIONALITY
 
+var logout = document.getElementById("logout");
 
-// NOT IN USE FOR NOW
-
-// var data;
-
-// function getData() {
-//     fetch('/git', {
-//         method: 'POST',
-//         headers: {
-//             'Content-Type': 'application/json'
-//         },
-//     })
-//         .then(function (res) {
-//             return res.json();
-//         })
-//         .then(function (res) {
-//             repopulate(res.userData, res.repoData);
-//         });
-// }   
-
-// getData();
+logout.onclick = function() {
+    window.localStorage.setItem('token', null);
+    location.reload(); 
+}
