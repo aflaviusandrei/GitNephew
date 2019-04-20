@@ -17,25 +17,23 @@ function findIndexTwo(a, cls) {
     return k;
 }
 
-var deleteButtons = document.getElementsByClassName("delete-button");
+function deleteFun() {
+    var deleteButtons = document.getElementsByClassName("delete-button");
 
-console.log(deleteButtons.length);
-for (var i = 0; i < deleteButtons.length; i++) {
-    console.log("deleteButtons[i]");
-    // deleteButtons[i].onclick = function() {
-    //     console.log(memberDataArr[findIndexTwo(this, "delete-button")].userData.name);
-    //     console.log("shit");
-    //     fetch("/delete", {
-    //         method: 'POST',
-    //         body: {
-    //             username: "d"
-    //         },
-    //         headers: {
-    //             'Content-Type': 'application/json',
-    //             'Authorization': `token ${bToken}`
-    //         }
-    //     });
-    // }
+    for (var i = 0; i < deleteButtons.length; i++) {
+        deleteButtons[i].onclick = function() {
+            fetch("/delete", {
+                method: 'POST',
+                body: {
+                    username: memberDataArr[findIndexTwo(this, "delete-button")].userData.name
+                },
+                headers: {
+                    'Content-Type': 'application/json',
+                    'Authorization': `token ${bToken}`
+                }
+            });
+        }
+    }
 }
 
 function repopulate() {
@@ -128,6 +126,7 @@ function loadFromDB() {
     if (prevPickedNav) prevPickedNav[prevPickedNav.length - 1].classList.remove("picked-nav");
     document.getElementsByClassName("nephew-side-box")[0].classList.add("picked-nav");
     document.getElementsByClassName("dashboard-display")[0].classList.add("picked-dash");
+    deleteFun();
 }
 
 function toggleReg() {
