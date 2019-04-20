@@ -37,14 +37,19 @@ function repopulate() {
     profilePic[profilePic.length - 1].style.background = "url('" + data.userData.avatar_url + "')";
     profilePic[profilePic.length - 1].style.backgroundSize = "cover";
 
-    for (var i = 0; i < data.repoData.length; i++) {
-        var a = document.createElement("a");
-        var p = document.createElement("p");
-        p.innerText = data.repoData[i].repoName;
-        a.setAttribute("href", data.repoData[i].repoURL);
-        a.classList.add("indiv-repo");
-        a.appendChild(p);
-        projectList[projectList.length - 1].appendChild(a);
+
+    projectList[lastActive.length - 1].innerHTML = "";
+    if (data.repoData.length != 0) {
+        for (var i = 0; i < data.repoData.length; i++) {
+            var a = document.createElement("a");
+            var p = document.createElement("p");
+            p.innerText = data.repoData[i].repoName;
+            a.setAttribute("href", data.repoData[i].repoURL);
+            a.classList.add("indiv-repo");
+            a.classList.add("number-" + (profilePic.length - 1));
+            a.appendChild(p);
+            projectList[lastActive.length - 1].appendChild(a);
+        }
     }
 
     var loader = document.getElementById("loader-container");
@@ -83,8 +88,8 @@ function loadFromDB() {
         a[a.length - 1].innerHTML = i;
     
         createNephew();
-        repopulate();
         nephewNavigation();
+        repopulate();
     }
 
     var prevPickedNav = document.getElementsByClassName("picked-nav"),
