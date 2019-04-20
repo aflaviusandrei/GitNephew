@@ -9,6 +9,35 @@ if (window.innerWidth <= 600) {
     }
 }
 
+function findIndexTwo(a, cls) {
+    var k = 0, els = document.getElementsByClassName(cls);
+
+    while (els[k] != a) k++;
+
+    return k;
+}
+
+var deleteButtons = document.getElementsByClassName("delete-button");
+
+console.log(deleteButtons.length);
+for (var i = 0; i < deleteButtons.length; i++) {
+    console.log("deleteButtons[i]");
+    // deleteButtons[i].onclick = function() {
+    //     console.log(memberDataArr[findIndexTwo(this, "delete-button")].userData.name);
+    //     console.log("shit");
+    //     fetch("/delete", {
+    //         method: 'POST',
+    //         body: {
+    //             username: "d"
+    //         },
+    //         headers: {
+    //             'Content-Type': 'application/json',
+    //             'Authorization': `token ${bToken}`
+    //         }
+    //     });
+    // }
+}
+
 function repopulate() {
     var events = document.getElementsByClassName("eventsnr"),
         repoNr = document.getElementsByClassName("reponr"),

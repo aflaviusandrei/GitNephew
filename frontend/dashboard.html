@@ -16,8 +16,7 @@
     <link rel="stylesheet"
           href="css/index.css">
     <script>
-          if (window.localStorage.getItem("token") === "null") {
-              console.log("user not logged in");
+          if (window.localStorage.getItem("token") === "null" || window.localStorage.getItem("token") === null) {
               window.location.replace("/");
           }
     </script>
@@ -94,11 +93,10 @@
                         <span><p class="followers"></p>&nbsp;followers</span>
                     </div>
                 </div>
-                <div class="refresh">
-                    <i class="material-icons">
-                        star_rate
-                    </i>
-                    <h3>Reward</h3>
+                <div class="delete">
+                        <form>
+                            <button class="delete-button" type="button"><i class="material-icons">close</i></button>
+                        </form>
                 </div>
             </div>
             <div class="stats-main">

@@ -17,10 +17,10 @@ document.addEventListener('DOMContentLoaded', function () {
             })
             .then(function (res) {
                 if (res.success) {
-                    if (window.localStorage.getItem('token') === "null")
+                    if (window.localStorage.getItem('token') === "null" || window.localStorage.getItem('token') === null)
                         window.localStorage.setItem('token', res.token);
-                        location.reload();
                 }
+                location.reload();
             });
     });
 });
