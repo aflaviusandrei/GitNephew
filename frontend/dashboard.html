@@ -15,6 +15,9 @@
           href="css/dashboard.css">
     <link rel="stylesheet"
           href="css/index.css">
+    <script>
+          if (window.localStorage.getItem('token') === null) window.location.replace("/");
+    </script>
 
 </head>
 
@@ -123,7 +126,7 @@
                 <div class="list-stat">
                     <span>List of projects</span>
                     <div class="repo-list">
-                        
+
                     </div>
                 </div>
             </div>
