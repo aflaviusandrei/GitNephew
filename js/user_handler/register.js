@@ -18,13 +18,13 @@ router.post('/', function (req, res) {
             newUser.save(function (err) {
                 if (err) {
                     console.log(err);
-                    res.send({
+                    res.status(500).send({
                         success: false,
                         message: err._message
                     });
                 }
                 else {
-                    res.send({
+                    res.status(200).send({
                         success: true,
                         message: 'User registered!'
                     });
