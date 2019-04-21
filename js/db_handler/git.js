@@ -21,13 +21,22 @@ router.post('/', tokenify, function (req, res) {
             } else if (!user) {
                 console.log(`adding new user - ${req.body.username} `);
                 saveUser(data);
+               return res.redirect('http://127.0.0.1:4000');
             }
             else {
                 console.log(`user already exists, adding new parent - ${data.bunic}`);
-                userDB.gitData.findOneAndUpdate({ username: req.body.username },{ $push: { bunic: data.bunic } },{ safe: true, upsert: true }, function (err, model) {
+                if (user.bunic !== data.bunic) {
+                userDB.gitData.findOneAndUpdate({ 
+                    username: req.body.username},
+                    { $addToSet: { bunic: data.bunic} },{ safe: true, upsert: true }, function (err, model) {
                         console.log(err);
                     });
+                    console.log('this happening');
+                    
+                   return  res.redirect('http://127.0.0.1:4000');
             }
+        }
+
         });
 
     });

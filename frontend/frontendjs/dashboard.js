@@ -214,14 +214,7 @@ addNew.onclick = function () {
             'Content-Type': 'application/json',
             'Authorization': `token ${bToken}`
         }
-    }).then(res => res.json())
-        .then(response => {
-            createNephew();
-            memberDataArr.push(response);
-            repopulate();
-            console.log(memberDataArr);
-            nepName.value = nepGit.value = "";
-        })
+    }).then( res => setTimeout(location.reload, 200)) 
         .catch(error => console.error('Error:', error));
 }
 
@@ -237,7 +230,7 @@ fetch('/db', {
     dbNeps = response;
     console.log(dbNeps);
     loadFromDB();
-    document.getElementById("username").innerText = dbNeps[0].bunic;
+  // document.getElementById("username").innerText = dbNeps[0].bunic;
 })
 .catch(error => console.error('Error:', error));
 

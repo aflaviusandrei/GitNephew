@@ -27,7 +27,7 @@ router.post('/', (req, res) => {
 
 
                     jwt.sign({ payload }, 'murePeSeDe', { expiresIn: '24h' }, (err, token) => {
-                        res.json({
+                        res.status(200).json({
                             token,
                             success: true
                         })
@@ -36,13 +36,13 @@ router.post('/', (req, res) => {
 
 
                 } else
-                    res.send({
+                    res.status(403).send({
                         success: false,
                         message: 'Incorrect password'
                     });
             });
         } else
-            res.send({
+            res.status(404).send({
                 success: false,
                 message: 'No username found with the name of ' + data.username
             });
