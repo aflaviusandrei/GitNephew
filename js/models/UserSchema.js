@@ -24,7 +24,7 @@ var gitDataSchema = new mongoose.Schema({
 		lastActivity: {type: 'Date'}
 		//raw: {type: ['Mixed']}
   },
-  bunic: {type: 'String'},
+  bunic: {type: ['String']},
   username: {type: 'String'}
 }, {unique:true});
 

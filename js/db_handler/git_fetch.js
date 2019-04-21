@@ -12,7 +12,7 @@ async function fetchUserData(username) {
 
   const data = await res.json();
 
-  console.log(data);
+  //console.log(data);
 
   let userData = {
     name: data.name,

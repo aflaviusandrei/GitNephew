@@ -8,28 +8,32 @@ const { gatherData } = require('./git_fetch');
 router.post('/', tokenify, function (req, res) {
 
     gatherData(req.body.username).then(data => {
-        //further db inplementation
+      
         let x = auth(req);
         const bunic = jwt.verify(x, 'murePeSeDe'); //console.log(bunic);
         data.bunic = bunic.payload.username;
         data.username = req.body.username;
-
-
-        res.send(data);
-        res.end(200);
-
-
-        let newChild = new userDB.gitData(data);
-
-
-        newChild.save((err) => {
+        console.log(data.username);
+        userDB.gitData.findOne({ username: req.body.username }, function (err, user) {
+            //console.log(`${user} + on database right now`);
             if (err) {
-                console.log(err)
+                res.send(err);
+            } else if (!user) {
+                console.log("adding new user");
+                let newChild = new userDB.gitData(data);
+                newChild.save((err) => {
+                    if (err) {
+                        console.log(err)
+                    }
+                })
             }
-        })
-    })
-});
+            else {
+                console.log("user already exists");
+            }
+        });
 
+    });
+});
 
 function tokenify(req, res, next) {
     let hBearer = req.headers['x-access-token'] || req.headers['authorization'];
