@@ -8,7 +8,7 @@ const { gatherData } = require('./git_fetch');
 router.post('/', tokenify, function (req, res) {
 
     gatherData(req.body.username).then(data => {
-      
+
         let x = auth(req);
         const bunic = jwt.verify(x, 'murePeSeDe'); //console.log(bunic);
         data.bunic = bunic.payload.username;
@@ -19,21 +19,28 @@ router.post('/', tokenify, function (req, res) {
             if (err) {
                 res.send(err);
             } else if (!user) {
-                console.log("adding new user");
-                let newChild = new userDB.gitData(data);
-                newChild.save((err) => {
-                    if (err) {
-                        console.log(err)
-                    }
-                })
+                console.log(`adding new user - ${req.body.username} `);
+                saveUser(data);
             }
             else {
-                console.log("user already exists");
+                console.log(`user already exists, adding new parent - ${data.bunic}`);
+                userDB.gitData.findOneAndUpdate({ username: req.body.username },{ $push: { bunic: data.bunic } },{ safe: true, upsert: true }, function (err, model) {
+                        console.log(err);
+                    });
             }
         });
 
     });
 });
+
+function saveUser(data) {
+    let newChild = new userDB.gitData(data);
+    newChild.save((err) => {
+        if (err) {
+            console.log(err)
+        }
+    })
+}
 
 function tokenify(req, res, next) {
     let hBearer = req.headers['x-access-token'] || req.headers['authorization'];

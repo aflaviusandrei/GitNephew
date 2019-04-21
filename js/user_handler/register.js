@@ -12,11 +12,12 @@ router.post('/', function (req, res) {
         bcrypt.hash(data.password, null, null, function (err, hash) {
 
             data.password = hash;
-            let newUser = new udb(data);
+            let newUser = new userDB.user(data);
             console.log(newUser);
 
             newUser.save(function (err) {
                 if (err) {
+                    console.log(err);
                     res.send({
                         success: false,
                         message: err._message
