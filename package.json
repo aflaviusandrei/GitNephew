@@ -18,10 +18,10 @@
   "homepage": "https://gitlab.com/reversio/fiicodefinal#readme",
   "dependencies": {
     "bcrypt-nodejs": "0.0.3",
-    "body-parser": "^1.18.3",
+    "body-parser": "^1.20.1",
     "cors": "^2.8.5",
     "esm": "^3.2.22",
-    "express": "^4.16.4",
+    "express": "^4.18.2",
     "jsonwebtoken": "^8.5.1",
     "mongoose": "^5.5.1",
     "mongoose-unique-array": "^0.3.1",
